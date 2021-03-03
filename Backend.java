@@ -199,7 +199,7 @@ public class Backend implements BackendInterface{
     ArrayList<MovieInterface> workingM = new ArrayList<MovieInterface>(keys.size());
     while (Mvit.hasNext()) {
       String currentKey = Mvit.next();
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<3 | i<keys.size(); i++) {
       if (workingM.get(i) == null) workingM.add(bigTable.get(currentKey));
       else {
         if (bigTable.get(currentKey).getAvgVote()>workingM.get(i).getAvgVote()) {
@@ -208,7 +208,7 @@ public class Backend implements BackendInterface{
       }
     }
     }
-    for (int a=0; a<3; a++) finalM.set(a, workingM.get(a));
+    for (int a=0; a<3| a<keys.size(); a++) finalM.set(a, workingM.get(a));
     return finalM;
   }
   public List<String> getAllGenres() {
