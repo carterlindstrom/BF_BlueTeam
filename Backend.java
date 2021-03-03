@@ -196,14 +196,52 @@ public class Backend implements BackendInterface{
   public List<MovieInterface> getThreeMovies(int startingIndex) {
     Iterator<String> Mvit = keys.iterator();
     ArrayList<MovieInterface> finalM = new ArrayList<MovieInterface>(3);
-    ArrayList<MovieInterface> workingM = new ArrayList<MovieInterface>(keys.size());
+    ArrayList<MovieInterface> workingM = new ArrayList<MovieInterface>();
+    int count=0;
     while (Mvit.hasNext()) {
       String currentKey = Mvit.next();
-    for (int i=0; i<3 | i<keys.size(); i++) {
-      if (workingM.get(i) == null) workingM.add(bigTable.get(currentKey));
-      else {
+    for (int i=0; (i<3); i++) {
+      if (count<3) {
+        if (count==0) {
+        workingM.add(bigTable.get(currentKey));
+        count++;
+        break;
+        }
+        if (count==1) {
+          if (bigTable.get(currentKey).getAvgVote()>workingM.get(0).getAvgVote()) {
+            workingM.add(bigTable.get(currentKey));
+            count++;
+            break;
+        }
+          else
+          {
+            workingM.add(1, bigTable.get(currentKey)); 
+            count++;
+            break;
+          }
+        }
+        if (count==2) {
+          if (bigTable.get(currentKey).getAvgVote()>workingM.get(0).getAvgVote()) {
+          workingM.add(bigTable.get(currentKey)); 
+          count++;
+          break;
+          }
+          if (bigTable.get(currentKey).getAvgVote()>workingM.get(1).getAvgVote()) {
+            workingM.add(1, bigTable.get(currentKey)); 
+            count++;
+            break;
+          }
+          else {
+            workingM.add(2, bigTable.get(currentKey)); 
+            count++;
+            break;
+          }
+        }
+      }
+      if (count>=3) {
         if (bigTable.get(currentKey).getAvgVote()>workingM.get(i).getAvgVote()) {
-          workingM.add(i,bigTable.get(currentKey));
+          workingM.add(i,bigTable.get(currentKey)); 
+          break;
         }
       }
     }
