@@ -1,0 +1,4 @@
+title1,otitle,2000,"genre1",20,contry1,lang1,director1,writer1,comp1,act1,description,8.0
+title2,otitle2,2000,"genre1",20,contry2,lang2,director2,writer2,comp2,act2,description2,8.5
+title3,otitle3,2003,"genre1,genre2",20,contry2,lang2,director2,writer2,comp2,act2,description2,9.0
+title4,otitle4,2004,"genre3,genre4",20,contry4,lang4,director4,writer4,comp4,act4,description2,7.1
