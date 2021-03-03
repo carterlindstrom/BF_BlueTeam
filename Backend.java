@@ -246,7 +246,7 @@ public class Backend implements BackendInterface{
       }
     }
     }
-    for (int a=0; a<3| a<keys.size(); a++) finalM.set(a, workingM.get(a));
+    for (int a=2; a>-1; a--) finalM.add(workingM.get(a));
     return finalM;
   }
   public List<String> getAllGenres() {
