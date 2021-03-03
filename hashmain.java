@@ -1,21 +1,24 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 
 public class hashmain {
   static HashTableMap<Integer, Integer> TestTable= new HashTableMap<Integer, Integer>(10);
   int lengthlist;
 
-  static Backend testback;//Insert file path here
+  static BackendInterface testback;//Insert file path here
   static Scanner scnn = new Scanner(System.in);
   public static void main(String[] args) {
     try {
-      testback=new Backend("");
+      testback=new Backend("C:\\Users\\Eagan\\Documents\\test.txt");
     } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
+      System.out.print("file not found");
     }//Insert file path here
+    
     testback.addAvgRating("10");
     testback.addAvgRating("9");
     testback.addAvgRating("8");
@@ -29,12 +32,14 @@ public class hashmain {
     testback.addAvgRating("0");
     printList();
     
-    
    }
   
     public static void printList() {
-      clearScreen();
+
+      //clearScreen();
     List<MovieInterface> list= testback.getThreeMovies(0);
+    list.toString();
+    
     System.out.println("Welcome to the Movie Sorter program");
     System.out.println("Please enter the number of the movie to recieve more details");
     System.out.println("Or, press G to enter genre selection or R to enter Rating selection");
@@ -68,7 +73,7 @@ public class hashmain {
     }
     
     public static void changeGenre() {
-      clearScreen();
+     // clearScreen();
       int lengthlist=0;
       double inputnum=0;
       List<String> list1= testback.getGenres();
@@ -100,7 +105,7 @@ public class hashmain {
       }
       String input = scnn.nextLine();
       if (input.equals("x")||input.equals("X")) {
-        return;
+        printList();
       }
       else try {
         inputnum = Double.parseDouble(input);
@@ -165,7 +170,7 @@ public class hashmain {
       }
       String input = scnn.nextLine();
       if (input.equals("x")||input.equals("X")) {
-        return;
+        printList();
       }
       else try {
         inputnum = Double.parseDouble(input);
@@ -189,7 +194,7 @@ public class hashmain {
     }
       
     public static void displayMovie(MovieInterface movie) {
-      clearScreen();
+      //clearScreen();
       List<String> list1= movie.getGenres();
       System.out.println("The movie title is: " + movie.getTitle());
       System.out.println("genres: " + movie.getDirector());
@@ -204,10 +209,7 @@ public class hashmain {
       String input = scnn.nextLine();
       
     }
-    public static void clearScreen() {  
-      System.out.print("\033[H\033[2J");  
-      System.out.flush();  
-  }  
+
       
       
   }
