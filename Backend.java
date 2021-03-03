@@ -7,7 +7,7 @@ import java.io.FileReader;
 public class Backend implements BackendInterface{
   private ArrayList<String> Genres;
   private int size;
-  private HashTableMap<String, MovieObject> bigTable;
+  private HashTableMap<String, MovieInterface> bigTable;
   private ArrayList<String> inList;
   private ArrayList<String> keys;
   private ArrayList<Integer> Ratings;
@@ -17,7 +17,7 @@ public class Backend implements BackendInterface{
     FileReader file = new FileReader(FilePath);
     MovieDataReaderInterface read = new MovieDataReader();
     List<MovieObject> BigList = read.readDataSet(file);
-    bigTable = new HashTableMap<String, MovieObject>(BigList.size()*2);
+    bigTable = new HashTableMap<String, MovieInterface>(BigList.size()*2);
     keys = new ArrayList<String>(BigList.size());
     for (int i=0; i<BigList.size(); i++) {
       MovieObject current = BigList.get(i);
@@ -52,18 +52,18 @@ public class Backend implements BackendInterface{
     
   }
   private void sweep() {
-    MovieObject currentFilm;
+    MovieInterface currentFilm;
     boolean validGenre =false;
     for (int i=0; i<bigTable.size(); i++) {
       currentFilm = bigTable.get(keys.get(i));
-      Iterator genreIt  = Genres.iterator();
+      Iterator<String> genreIt  = Genres.iterator();
       while (genreIt.hasNext()) {
         if (Genres.contains(genreIt.next())) validGenre=true;
       }
       if (validGenre) {
         validGenre=false;
         if (Ratings.contains((Integer) currentFilm.getAvgVote().intValue())) {
-          if (!inList.contains(currentFilm)) {
+          if (!inList.contains(keys.get(i))) {
             inList.add(keys.get(i));
             size++;
           }
@@ -140,10 +140,10 @@ public class Backend implements BackendInterface{
     return size;
     
   }
-  public List<MovieObject> getThreeMovies(int startingIndex) {
+  public List<MovieInterface> getThreeMovies(int startingIndex) {
     Iterator<String> Mvit = keys.iterator();
-    ArrayList<MovieObject> finalM = new ArrayList<MovieObject>(3);
-    ArrayList<MovieObject> workingM = new ArrayList<MovieObject>(keys.size());
+    ArrayList<MovieInterface> finalM = new ArrayList<MovieInterface>(3);
+    ArrayList<MovieInterface> workingM = new ArrayList<MovieInterface>(keys.size());
     while (Mvit.hasNext()) {
       String currentKey = Mvit.next();
     for (int i=0; i<3; i++) {
