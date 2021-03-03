@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.zip.DataFormatException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,8 +19,12 @@ public class Backend implements BackendInterface{
     MovieDataReaderInterface read = new MovieDataReader();
     try {
     BigList = read.readDataSet(FileRead);
-    } catch (IOException DataFormatException) { System.out.println("File format error");
+    } catch (IOException IOException){ System.out.println("File format error");
     return;}
+    catch (DataFormatException DataException) {
+      System.out.println("File format error");
+      return;
+    }
     bigTable = new HashTableMap<String, MovieInterface>(BigList.size()*2);
     keys = new ArrayList<String>(BigList.size());
     for (int i=0; i<BigList.size(); i++) {
