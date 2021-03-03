@@ -3,6 +3,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class Backend implements BackendInterface{
   private ArrayList<String> Genres;
@@ -12,11 +13,54 @@ public class Backend implements BackendInterface{
   private ArrayList<String> keys;
   private ArrayList<Integer> Ratings;
   private ArrayList<String> allGenres;
-
-  public Backend(String FilePath) throws FileNotFoundException {
-    FileReader file = new FileReader(FilePath);
+  public Backend(FileReader FileRead){
+    List<MovieInterface> BigList;
     MovieDataReaderInterface read = new MovieDataReader();
-    List<MovieInterface> BigList = read.readDataSet(file);
+    try {
+    BigList = read.readDataSet(FileRead);
+    } catch (IOException DataFormatException) { System.out.println("File format error");
+    return;}
+    bigTable = new HashTableMap<String, MovieInterface>(BigList.size()*2);
+    keys = new ArrayList<String>(BigList.size());
+    for (int i=0; i<BigList.size(); i++) {
+      MovieInterface current = BigList.get(i);
+      String key = "";
+      for (int a=0; a<current.getGenres().size(); a++) key.concat(current.getGenres().get(a));
+      key.concat(current.getTitle());
+      key.concat(current.getDirector());
+      bigTable.put(key, current);
+      keys.add(key);
+      Iterator<String> itGenre = current.getGenres().iterator();
+      String cGenre;
+      allGenres = new ArrayList<String>(10);
+      int gcount=0;
+      while (itGenre.hasNext()) {
+        cGenre = itGenre.next();
+        if (!allGenres.contains(cGenre)) {
+          allGenres.add(cGenre); 
+          gcount++;}
+        if (gcount+2 == allGenres.size()) {
+          ArrayList<String> newAllGenres = new ArrayList<String>((gcount+2)*2);
+          Iterator<String> genit2 = allGenres.iterator();
+          while (genit2.hasNext()) newAllGenres.add(genit2.next());
+          allGenres = newAllGenres;
+        }
+        }
+      }
+      inList = new ArrayList<String>(BigList.size());
+      Genres = new ArrayList<String>(10);
+      ArrayList<Integer> Ratings = new ArrayList<Integer>(11);
+      size = 0;
+      
+    
+  }
+  public Backend(String FilePath) throws FileNotFoundException {
+    List<MovieInterface> BigList;
+    FileReader file = new FileReader(FilePath);
+    MovieDataReaderInterface read = new MovieDataReader();try {
+      BigList = read.readDataSet(file);
+      } catch (IOException DataFormatException) { System.out.println("File format error");
+      return;}
     bigTable = new HashTableMap<String, MovieInterface>(BigList.size()*2);
     keys = new ArrayList<String>(BigList.size());
     for (int i=0; i<BigList.size(); i++) {
