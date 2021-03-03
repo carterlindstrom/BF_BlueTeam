@@ -16,11 +16,11 @@ public class Backend implements BackendInterface{
   public Backend(String FilePath) throws FileNotFoundException {
     FileReader file = new FileReader(FilePath);
     MovieDataReaderInterface read = new MovieDataReader();
-    List<MovieObject> BigList = read.readDataSet(file);
+    List<MovieInterface> BigList = read.readDataSet(file);
     bigTable = new HashTableMap<String, MovieInterface>(BigList.size()*2);
     keys = new ArrayList<String>(BigList.size());
     for (int i=0; i<BigList.size(); i++) {
-      MovieObject current = BigList.get(i);
+      MovieInterface current = BigList.get(i);
       String key = "";
       for (int a=0; a<current.getGenres().size(); a++) key.concat(current.getGenres().get(a));
       key.concat(current.getTitle());
@@ -95,7 +95,7 @@ public class Backend implements BackendInterface{
   private void cleanup() {
     Iterator<String> itFilms = inList.iterator();
     int index = 0;
-    MovieObject current;
+    MovieInterface current;
     boolean genreMatch = false;
     Iterator<String> itgenre;
     while (itFilms.hasNext()) {
