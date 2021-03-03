@@ -74,6 +74,10 @@ public class Backend implements BackendInterface{
       }
     System.out.println("Succesfully loaded in file, film count:");
     System.out.println(BigList.size());
+    System.out.println("loaded ratings:");
+    System.out.println(BigList.get(0).getAvgVote());
+    System.out.println(BigList.get(1).getAvgVote());
+    System.out.println(BigList.get(2).getAvgVote());
     bigTable = new HashTableMap<String, MovieInterface>(BigList.size()*2);
     keys = new ArrayList<String>(BigList.size());
     for (int i=0; i<BigList.size(); i++) {
@@ -101,10 +105,6 @@ public class Backend implements BackendInterface{
         }
         }
       }
-    System.out.println("loaded ratings:");
-    System.out.println(BigList.get(0).getAvgVote());
-    System.out.println(BigList.get(1).getAvgVote());
-    System.out.println(BigList.get(2).getAvgVote());
       inList = new ArrayList<String>(BigList.size());
       Genres = new ArrayList<String>(10);
       Ratings = new ArrayList<Integer>(11);
