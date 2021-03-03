@@ -6,10 +6,9 @@ import java.util.Scanner;
 public class hashmain {
   static HashTableMap<Integer, Integer> TestTable= new HashTableMap<Integer, Integer>(10);
   int lengthlist;
-  static BackendInterface testback=new BackendInterface();
+  static BackendInterface testback=new BackendInterface("");
   static Scanner scnn = new Scanner(System.in);
   public static void main(String[] args) {
-    testback.backend("");
     testback.addAvgRating("10");
     testback.addAvgRating("9");
     testback.addAvgRating("8");
