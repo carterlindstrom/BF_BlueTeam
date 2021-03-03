@@ -47,7 +47,10 @@ public class Backend implements BackendInterface{
           gcount++;}
         }
         }
-
+      System.out.println("loaded ratings:");
+      System.out.println(BigList.get(0).getAvgVote());
+      System.out.println(BigList.get(1).getAvgVote());
+      System.out.println(BigList.get(2).getAvgVote());
       inList = new ArrayList<String>(BigList.size());
       Genres = new ArrayList<String>(10);
       Ratings = new ArrayList<Integer>(11);
