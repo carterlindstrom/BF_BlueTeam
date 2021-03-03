@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,9 +7,15 @@ import java.util.Scanner;
 public class hashmain {
   static HashTableMap<Integer, Integer> TestTable= new HashTableMap<Integer, Integer>(10);
   int lengthlist;
-  static BackendInterface testback=new BackendInterface("");
+
+  static Backend testback;//Insert file path here
   static Scanner scnn = new Scanner(System.in);
   public static void main(String[] args) {
+    try {
+      testback=new Backend("");
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+    }//Insert file path here
     testback.addAvgRating("10");
     testback.addAvgRating("9");
     testback.addAvgRating("8");
