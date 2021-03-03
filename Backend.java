@@ -247,7 +247,7 @@ public class Backend implements BackendInterface{
     }
     }
     for (int a=2; a>-1; a--) finalM.add(workingM.get(a));
-    System.out.Println("final ratings:");
+    System.out.println("final ratings:");
     System.out.println(finalM.get(0).getAvgVote());
     System.out.println(finalM.get(1).getAvgVote());
     System.out.println(finalM.get(2).getAvgVote());
