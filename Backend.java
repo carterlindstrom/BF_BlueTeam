@@ -4,7 +4,7 @@ import java.util.List;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class Backend{
+public class Backend implements BackendInterface{
   private ArrayList<String> Genres;
   private int size;
   private HashTableMap<String, MovieObject> bigTable;
