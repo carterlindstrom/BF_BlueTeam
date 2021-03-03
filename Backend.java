@@ -14,6 +14,7 @@ public class Backend implements BackendInterface{
   private ArrayList<String> keys;
   private ArrayList<Integer> Ratings;
   private ArrayList<String> allGenres;
+  //uses a file reader vs a path
   public Backend(FileReader FileRead){
     List<MovieInterface> BigList;
     MovieDataReaderInterface read = new MovieDataReader();
@@ -56,16 +57,25 @@ public class Backend implements BackendInterface{
       Genres = new ArrayList<String>(10);
       ArrayList<Integer> Ratings = new ArrayList<Integer>(11);
       size = 0;
-      
-    
-  }
+      }
+  
+  
+  //just uses a path
   public Backend(String FilePath) throws FileNotFoundException {
     List<MovieInterface> BigList;
     FileReader file = new FileReader(FilePath);
-    MovieDataReaderInterface read = new MovieDataReader();try {
+    MovieDataReader read = new MovieDataReader();
+    try {
+      System.out.println("Right before readdataset");
       BigList = read.readDataSet(file);
-      } catch (IOException DataFormatException) { System.out.println("File format error");
+      } catch (IOException IOException){ System.out.println("File format error");
       return;}
+      catch (DataFormatException DataException) {
+        System.out.println("File format error");
+        return;
+      }
+    System.out.println("Succesfully loaded in file, film count:");
+    System.out.println(BigList.size());
     bigTable = new HashTableMap<String, MovieInterface>(BigList.size()*2);
     keys = new ArrayList<String>(BigList.size());
     for (int i=0; i<BigList.size(); i++) {
@@ -151,7 +161,7 @@ public class Backend implements BackendInterface{
       current = bigTable.get(itFilms.next());
       itgenre = current.getGenres().iterator();
       while (itFilms.hasNext()) if (Genres.contains(itFilms.next())) genreMatch=true;
-      if (genreMatch | Ratings.contains((Integer)current.getAvgVote().intValue())) {
+      if (genreMatch & Ratings.contains((Integer)current.getAvgVote().intValue())) {
         genreMatch=false;
       }
       else {
