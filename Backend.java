@@ -45,17 +45,12 @@ public class Backend implements BackendInterface{
         if (!allGenres.contains(cGenre)) {
           allGenres.add(cGenre); 
           gcount++;}
-        if (gcount+2 == allGenres.size()) {
-          ArrayList<String> newAllGenres = new ArrayList<String>((gcount+2)*2);
-          Iterator<String> genit2 = allGenres.iterator();
-          while (genit2.hasNext()) newAllGenres.add(genit2.next());
-          allGenres = newAllGenres;
         }
         }
-      }
+
       inList = new ArrayList<String>(BigList.size());
       Genres = new ArrayList<String>(10);
-      ArrayList<Integer> Ratings = new ArrayList<Integer>(11);
+      Ratings = new ArrayList<Integer>(11);
       size = 0;
       }
   
@@ -105,9 +100,8 @@ public class Backend implements BackendInterface{
       }
       inList = new ArrayList<String>(BigList.size());
       Genres = new ArrayList<String>(10);
-      ArrayList<Integer> Ratings = new ArrayList<Integer>(11);
+      Ratings = new ArrayList<Integer>(11);
       size = 0;
-      
     
   }
   private void sweep() {
