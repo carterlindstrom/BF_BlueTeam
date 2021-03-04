@@ -145,6 +145,17 @@ public class hashmain {
       double inputnum=0;
       List<String> list1= testback.getAvgRatings();
     List<String> list2= new ArrayList<String>();
+    list2.add("0");
+    list2.add("1");
+    list2.add("2");
+    list2.add("3");
+    list2.add("4");
+    list2.add("5");
+    list2.add("6");
+    list2.add("7");
+    list2.add("8");
+    list2.add("9");
+    list2.add("10");
     List<String> list3= new ArrayList<String>();
     System.out.println("Please press the number of rating to add ");
     System.out.println("If it is curenttly being used it will be removed. If it is not it will be added.");
@@ -165,13 +176,13 @@ public class hashmain {
       System.out.println("Ratings currently being sorted ");
       for (int x=0; x< list1.size();x++)
       {
-          System.out.println(list1.size()-1-x + " Rating:" + list1.get(x));
+          System.out.println(x+1 + " Rating:" + list1.get(x));
           lengthlist=x+1;
       }
       System.out.println("Ratings not included ");
       for (int x=0; x< list3.size();x++)
       {
-          System.out.println(list1.size()-1-x-lengthlist + " Rating:" + list3.get(x));
+          System.out.println(x+1+lengthlist + " Rating:" + list3.get(x));
       }
       String input = scnn.nextLine();
       if (input.equals("x")||input.equals("X")) {
@@ -181,7 +192,7 @@ public class hashmain {
       try {
         inputnum = Integer.parseInt(input);
     } catch (NumberFormatException nfe) {
-      System.out.println("Improper input, try again.");
+      System.out.println("Improper input, try again.lol");
       changeRating();
     }
       if (inputnum-1 > list2.size()||inputnum-1 <0) {
