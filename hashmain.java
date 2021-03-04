@@ -14,7 +14,7 @@ public class hashmain {
   static Scanner scnn = new Scanner(System.in);
   public static void main(String[] args) {
     try {
-      testback=new Backend("C:\\Users\\Eagan\\Downloads\\test.txt");
+      testback=new Backend("C:\\Users\\Eagan\\Downloads\\movies.csv");
     } catch (FileNotFoundException e) {
       System.out.print("file not found");
     }//Insert file path here
@@ -43,14 +43,14 @@ public class hashmain {
 
       //clearScreen();
     List<MovieInterface> list= testback.getThreeMovies(0);
-    list.toString();
+    System.out.println(list.toString());
     
     System.out.println("Welcome to the Movie Sorter program");
     System.out.println("Please enter the number of the movie to recieve more details");
     System.out.println("Or, press G to enter genre selection or R to enter Rating selection");
     System.out.println("X will exit the program");
       System.out.println("Movies:");
-      for (int x=0; x< testback.getNumberOfMovies();x++)
+      for (int x=0; x< list.size();x++)
       {
         if(list.get(x)!=null)
           System.out.println(x+1 + " " + list.get(x).getTitle());
@@ -83,6 +83,7 @@ public class hashmain {
       double inputnum=0;
       List<String> list1= testback.getGenres();
     List<String> list2= testback.getAllGenres();
+    System.out.println(list2.toString());
     List<String> list3= new ArrayList<String>();
     System.out.println("Please press the number of a genre ");
     System.out.println("If it is curenttly being used it will be removed. If it is not it will be added.");
@@ -122,7 +123,7 @@ public class hashmain {
       System.out.println("Improper input, try again.");
       changeRating();
     }
-      if (inputnum-1 > list2.size()||inputnum-1 <0) {
+      if (inputnum-1 >= list2.size()||inputnum-1 <0) {
         System.out.println("Improper input, try again.");
         changeGenre();
       }
@@ -208,7 +209,7 @@ public class hashmain {
       }
       else if (inputnum-1 >= lengthlist) {
         System.out.println("Removing "+ list3.get((int) (inputnum-1-lengthlist)));
-        testback.addAvgRating(list3.get((int) (inputnum-1)));
+        testback.addAvgRating(list3.get((int) (inputnum-1)-lengthlist));
         changeRating();
       }
       }
