@@ -1,6 +1,15 @@
-
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class Junittest {
+  private final PrintStream standardOut = System.out;
+  private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+  @BeforeEach
+  public void setUp() {
+      System.setOut(new PrintStream(outputStreamCaptor));
+  }
+}
   @Test
   void givenSystemOutRedirection_whenInvokePrintln_thenOutputCaptorSuccess() {
        hashmain.main(null);
@@ -12,4 +21,5 @@ public class Junittest {
           + "1 title3\r\n"
           + "2 title1\r\n"
           + "3 title2\r\n", outputStreamCaptor.toString().trim());
+  }
   }
