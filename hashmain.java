@@ -225,7 +225,7 @@ public class hashmain {
         System.out.println(list1.get(x));
       }
       System.out.println("It was made in: " + movie.getYear());
-      System.out.println("The Avg Rating is: " + movie.getTitle());
+      System.out.println("The Avg Rating is: " + movie.getAvgVote());
       System.out.println("It was directed by: " + movie.getDirector());
       System.out.println("Press any key to go back ");
       String input = scnn.nextLine();
