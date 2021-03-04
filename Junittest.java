@@ -1,5 +1,7 @@
-/*import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 public class Junittest {
   private final PrintStream standardOut = System.out;
@@ -9,7 +11,8 @@ public class Junittest {
   public void setUp() {
       System.setOut(new PrintStream(outputStreamCaptor));
   }
-}
+
+
   @Test
   void givenSystemOutRedirection_whenInvokePrintln_thenOutputCaptorSuccess() {
        hashmain.main(null);
@@ -22,4 +25,4 @@ public class Junittest {
           + "2 As I Am\r\n"
           + "3 Breakout\r\n", outputStreamCaptor.toString().trim());
   }
-  }*/
+}
