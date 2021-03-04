@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.zip.DataFormatException;
@@ -74,18 +75,13 @@ public class Backend implements BackendInterface{
       }
     System.out.println("Succesfully loaded in file, film count:");
     System.out.println(BigList.size());
-    System.out.println("loaded ratings:");
-    System.out.println(BigList.get(0).getAvgVote());
-    System.out.println(BigList.get(1).getAvgVote());
-    System.out.println(BigList.get(2).getAvgVote());
     bigTable = new HashTableMap<String, MovieInterface>(BigList.size()*2);
     keys = new ArrayList<String>(BigList.size());
     for (int i=0; i<BigList.size(); i++) {
       MovieInterface current = BigList.get(i);
-      String key = "";
-      for (int a=0; a<current.getGenres().size(); a++) key.concat(current.getGenres().get(a));
-      key.concat(current.getTitle());
-      key.concat(current.getDirector());
+      String key = current.getDirector();
+      for (int a=0; a<current.getGenres().size(); a++) key= key+current.getGenres().get(a);
+      key=key+current.getTitle();
       bigTable.put(key, current);
       keys.add(key);
       Iterator<String> itGenre = current.getGenres().iterator();
@@ -143,7 +139,6 @@ public class Backend implements BackendInterface{
     if (Genres.contains(genre)) return;
     Genres.add(genre);
     sweep();
-    if (Genres.get(Genres.size()-2)!=null) doubleGenre();
   }
   public void addAvgRating(String rating) {
     int intRating = Integer.parseInt(rating);
@@ -201,63 +196,21 @@ public class Backend implements BackendInterface{
     
   }
   public List<MovieInterface> getThreeMovies(int startingIndex) {
-    Iterator<String> Mvit = keys.iterator();
+    System.out.println(keys.toString());
+    List<MovieInterface> workingM = new ArrayList<MovieInterface>();
+    Iterator<String> keyIt = keys.iterator();
+    while (keyIt.hasNext()){
+      workingM.add(bigTable.get(keyIt.next()));
+      
+    }
+    workingM.sort(null);
+    Collections.reverse(workingM);
     ArrayList<MovieInterface> finalM = new ArrayList<MovieInterface>(3);
-    ArrayList<MovieInterface> workingM = new ArrayList<MovieInterface>();
-    int count=0;
-    while (Mvit.hasNext()) {
-      String currentKey = Mvit.next();
-    for (int i=0; (i<3); i++) {
-      if (count<3) {
-        if (count==0) {
-        workingM.add(bigTable.get(currentKey));
-        count++;
-        break;
-        }
-        if (count==1) {
-          if (bigTable.get(currentKey).getAvgVote()>workingM.get(0).getAvgVote()) {
-            workingM.add(bigTable.get(currentKey));
-            count++;
-            break;
-        }
-          else
-          {
-            workingM.add(1, bigTable.get(currentKey)); 
-            count++;
-            break;
-          }
-        }
-        if (count==2) {
-          if (bigTable.get(currentKey).getAvgVote()>workingM.get(0).getAvgVote()) {
-          workingM.add(bigTable.get(currentKey)); 
-          count++;
-          break;
-          }
-          if (bigTable.get(currentKey).getAvgVote()>workingM.get(1).getAvgVote()) {
-            workingM.add(1, bigTable.get(currentKey)); 
-            count++;
-            break;
-          }
-          else {
-            workingM.add(2, bigTable.get(currentKey)); 
-            count++;
-            break;
-          }
-        }
-      }
-      if (count>=3) {
-        if (bigTable.get(currentKey).getAvgVote()>workingM.get(i).getAvgVote()) {
-          workingM.add(i,bigTable.get(currentKey)); 
-          break;
-        }
-      }
+    for (int i=startingIndex; i<startingIndex+3 | i<workingM.size(); i++) {
+      finalM.add(workingM.get(i));
     }
-    }
-    for (int a=2; a>-1; a--) finalM.add(workingM.get(a));
-    System.out.println("final ratings:");
-    System.out.println(finalM.get(0).getAvgVote());
-    System.out.println(finalM.get(1).getAvgVote());
-    System.out.println(finalM.get(2).getAvgVote());
+    Collections.reverse(finalM);
+    finalM.forEach(member -> System.out.println(member.getAvgVote()));
     return finalM;
   }
   public List<String> getAllGenres() {
