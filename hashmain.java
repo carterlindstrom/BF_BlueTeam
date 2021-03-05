@@ -14,7 +14,7 @@ public class hashmain {//starts the program and fills the average ratings
   static Scanner scnn = new Scanner(System.in);
   public static void main(String[] args) {
     try {
-      testback=new Backend("C:\\Users\\Eagan\\Downloads\\movies.csv");
+      testback=new Backend("Movies.csv");
     } catch (FileNotFoundException e) {
       System.out.print("file not found");
     }//Insert file path here
