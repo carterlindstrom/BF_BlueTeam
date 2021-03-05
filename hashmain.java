@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.zip.DataFormatException;
 
 
-public class hashmain {
+public class hashmain {//starts the program and fills the average ratings
   static HashTableMap<Integer, Integer> TestTable= new HashTableMap<Integer, Integer>(10);
   int lengthlist;
 
@@ -39,7 +39,7 @@ public class hashmain {
     
    }
   
-    public static void printList() {
+    public static void printList() {//Writes the three movies and explains how to use the program
 
       //clearScreen();
     List<MovieInterface> list= testback.getThreeMovies(0);
@@ -77,7 +77,7 @@ public class hashmain {
       }
     }
     
-    public static void changeGenre() {
+    public static void changeGenre() {//Displays all generes and genres that are and are not included, asks user for imput, input switches the positions
      // clearScreen();
       int lengthlist=0;
       double inputnum=0;
@@ -141,7 +141,7 @@ public class hashmain {
       }
       }
     }
-    public static void changeRating() {
+    public static void changeRating() {//Displays all ratings and Ratings that are and are not included, asks user for imput, input switches the positions
       int lengthlist=0;
       double inputnum=0;
       List<String> list1= testback.getAvgRatings();
@@ -215,7 +215,7 @@ public class hashmain {
       }
     }
       
-    public static void displayMovie(MovieInterface movie) {
+    public static void displayMovie(MovieInterface movie) {//Displays the movie and their internals.
       //clearScreen();
       List<String> list1= movie.getGenres();
       System.out.println("The movie title is: " + movie.getTitle());
