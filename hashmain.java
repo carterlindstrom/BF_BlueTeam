@@ -1,3 +1,11 @@
+// --== CS400 File Header Information ==--
+// Name:Eagan Kutz
+// Email: ejkutz@wisc.edu
+// Team: BF Blue
+// Role: Front End
+// TA: Brianna Cochran
+// Lecturer: Gary Dahl
+// Notes to Grader: <optional extra notes>
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
